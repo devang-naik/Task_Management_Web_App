@@ -11,13 +11,20 @@ app = Flask(__name__, static_folder=".", static_url_path="")
 
 FIELDS = ["name", "description", "startDate", "endDate", "assignedTo", "status", "priority", "percent"]
 
-
+# This function is used to get the database connection from the Flask application context.
+# It checks if a database connection already exists in the `g` object (which is a special object provided by Flask to store data during
+# a request). If it doesn't exist, it creates a new connection to the SQLite database specified by `DB_PATH`, sets the row factory to 
+#return rows as dictionaries, and stores the connection in `g.db`. Finally, it returns the database connection.
 def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(DB_PATH)
         g.db.row_factory = sqlite3.Row
     return g.db
 
+#This function is registered as a teardown function for the Flask application context. 
+#It is called when the application context is torn down, which happens at the end of each request. 
+#The purpose of this function is to close the database connection if it exists.
+# It retrieves the database connection from `g.db`, removes it from `g`, and closes it if it was open. This ensures that database connections are properly cleaned up after each request, preventing resource leaks.
 
 @app.teardown_appcontext
 def close_db(exception=None):
@@ -25,7 +32,7 @@ def close_db(exception=None):
     if db is not None:
         db.close()
 
-
+#This function initializes the SQLite database by creating a table named `tasks` if it doesn't already exist.
 def init_db():
     db = sqlite3.connect(DB_PATH)
     db.row_factory = sqlite3.Row
@@ -44,9 +51,7 @@ def init_db():
         )
         """
     )
-    existing_columns = {row["name"] for row in db.execute("PRAGMA table_info(tasks)")}
-    if "priority" not in existing_columns:
-        db.execute("ALTER TABLE tasks ADD COLUMN priority TEXT NOT NULL DEFAULT ''")
+    
     db.commit()
     db.close()
 
