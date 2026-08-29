@@ -62,6 +62,8 @@ pip install flask
 
 ```bash
 python app.py
+or 
+Execute run.bat
 ```
 
 ### 5. Open it in your browser
