@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Task Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <center><h1>Bits Pilani,Hyderbad Campus <br>Task Management Web App </h1></center>
+
+
+    <div class="toolbar">
+      <button id="add-task-btn" type="button">Create Task</button>
+      <div class="filters">
+        <input id="search-input" type="search" placeholder="Search by name, description, or assignee...">
+        <select id="status-filter">
+          <option value="">All Statuses</option>
+        </select>
+        <select id="priority-filter">
+          <option value="">All Priorities</option>
+        </select>
+        <button id="clear-filters-btn" type="button" class="ghost-btn">Clear</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th>Sl.No</th>
+            <th>Task Name</th>
+            <th>Assigned To</th>
+            <th>Start Date <br>(yyyy-mm-dd)</th>
+            <th>End Date <br>(yyyy-mm-dd)</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Completion</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="task-body"></tbody>
+      </table>
+    </div>
+    <p id="empty-state" hidden>No tasks yet. Click "Create Task" to add one.</p>
+    <p class="page-credit">Created by Devang Navneeth Naik</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

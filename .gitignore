@@ -1,0 +1,12 @@
+# Local runtime data / logs
+tasks.db
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor
+.vscode/
